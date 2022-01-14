@@ -16,6 +16,12 @@ if not found:
     found, num_guesses = pwa.two_words(password)
     time_end = time.time()
 
+if not found:
+    print("Analyzing Two word and a digit passwords")
+    found, num_guesses = pwa.twoWordsAndADigit(password)
+    time_end = time.time()
+
+
 # report results
 if found:
     print(password, "found in", num_guesses, "guesses")
