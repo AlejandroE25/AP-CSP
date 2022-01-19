@@ -49,7 +49,6 @@ def twoWordsAndADigit(password):
         for sw in words:
             for n in numbers:
                 guesses += 1
-
                 phrase1 = n + w + sw
                 phrase2 = w + sw + n
 
