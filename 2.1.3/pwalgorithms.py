@@ -56,3 +56,4 @@ def twoWordsAndADigit(password):
                     return True, guesses
                 if phrase2 == password:
                     return True, guesses + 1
+    return False, guesses
