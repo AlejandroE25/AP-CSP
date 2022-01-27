@@ -2,16 +2,42 @@
 #   A program creates a window on your screen using Tkinter.
 import tkinter as tk
 
+enteredPass = None
+
+
+def buttonTest():
+    frameAuth.tkraise()
+    global enteredPass
+    enteredPass = passVar.get()
+
+    print(enteredPass)
+
+
 # main window
 root = tk.Tk()
-root.wm_geometry("200x100")
+root.wm_geometry("140x200")
 root.title('Authorization')
 
+passVar = tk.StringVar()
+userVar = tk.StringVar()
+
 frameLogin = tk.Frame(root)
-frameLogin.grid()
+frameLogin.grid(row=0, column=0, sticky="news")
 
-usernameLabel = tk.Label(frameLogin, text='Username:').pack()
+usernameLabel = tk.Label(frameLogin, text='Username:', font="Consolas").pack()
+userEnt = tk.Entry(frameLogin, bd=3, textvariable=userVar).pack(pady=5, padx=5)
 
-passwordLabel = tk.Label(frameLogin, text="Password:", font="Courier").pack()
+passwordLabel = tk.Label(frameLogin, text="Password:", font="Consolas").pack()
+passEnt = tk.Entry(frameLogin, bd=3, textvariable=passVar, show="·").pack(pady=5, padx=5)
+
+loginButton = tk.Button(frameLogin, text="Log in", command=buttonTest).pack()
+
+frameAuth = tk.Frame(root)
+frameAuth.grid(row=0, column=0, sticky="news")
+passAuthLabel = tk.Label(frameAuth, font="Consolas", lbl=enteredPass)
+
+frameLogin.tkraise()
+
+print(enteredPass)
 
 root.mainloop()
