@@ -6,11 +6,14 @@ enteredPass = None
 
 
 def buttonTest():
-    frameAuth.tkraise()
+
     global enteredPass
     enteredPass = passVar.get()
 
-    print(enteredPass)
+    passAuthLabel = tk.Label(frameAuth, font="Consolas", text=enteredPass).pack()
+    frameAuth.tkraise()
+
+    print(enteredPass, " - Button Test")
 
 
 # main window
@@ -34,10 +37,8 @@ loginButton = tk.Button(frameLogin, text="Log in", command=buttonTest).pack()
 
 frameAuth = tk.Frame(root)
 frameAuth.grid(row=0, column=0, sticky="news")
-passAuthLabel = tk.Label(frameAuth, font="Consolas", lbl=enteredPass)
+
 
 frameLogin.tkraise()
-
-print(enteredPass)
 
 root.mainloop()
