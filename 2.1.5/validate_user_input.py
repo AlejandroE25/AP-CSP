@@ -13,3 +13,7 @@ def intInput(inputMsg):
             repeats = False
             outValue = int(inValue)
             return outValue
+
+
+
+#  The isAlpha method checks if a string is comprised of fully alphabetic characters.
