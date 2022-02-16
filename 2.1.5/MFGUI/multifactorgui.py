@@ -146,8 +146,8 @@ class MultiFactorAuth(tk.Tk):
     for c in a:
       s1[i] = c
       i += 1   
-    s1[len(a)-1] = ":"
-    i = len(a)
+    s1[len(a)] = ":"
+    i = len(a)+1
     for c in b:
       s1[i] = c
       i += 1

@@ -8,22 +8,22 @@ shouldRepeat = True
 while shouldRepeat:
     user = input("Enter in a valid username:  ")
     for c in user:
-        if user.isalnum == False:
-            print("Please enter a valid username")
-            break
-        else:
+        if user.isdigit and user.isalpha:
             shouldRepeat = False
-
+        else:
+            print("Please only use Alpha numeric characters")
+        
 shouldRepeat = True
 
 while shouldRepeat:
     password = input("Enter in a valid password:  ")
     for c in password:
-        if password.isalnum == False:
-            print("Please enter a valid password")
-            break
+        if user.isdigit and user.isalpha:
+                shouldRepeat = False
         else:
-            shouldRepeat = False
+            print("Please only use Alpha numeric characters")
+print("\nAll done!")
+
         
 my_auth = mfg.MultiFactorAuth() # Creates a local variable for the class MultiFactorAuth
 
