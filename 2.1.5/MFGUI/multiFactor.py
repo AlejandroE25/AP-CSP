@@ -8,7 +8,7 @@ shouldRepeat = True
 while shouldRepeat:
     user = input("Enter in a valid username:  ")
     for c in user:
-        if user.isdigit and user.isalpha:
+        if user.isalnum:
             shouldRepeat = False
         else:
             print("Please only use Alpha numeric characters")
@@ -18,10 +18,11 @@ shouldRepeat = True
 while shouldRepeat:
     password = input("Enter in a valid password:  ")
     for c in password:
-        if user.isdigit and user.isalpha:
+        if user.isalnum:
                 shouldRepeat = False
         else:
             print("Please only use Alpha numeric characters")
+
 print("\nAll done!")
 
         
