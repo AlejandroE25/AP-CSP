@@ -6,13 +6,17 @@ def monitor():
     current = get_ph_level()
     mesg = "pH level OK"
 
+
+    maxPh = len(ph_levels) - 1
+
+
     if (current < ph_levels[0]):
       mesg = "pH level too low!"
-    elif (current > ph_levels[2]):
+    elif (current > ph_levels[maxPh]):
       mesg = "pH level too high!"
     
   except:
-    print("Unexpected error")
+    print("Unexpected error - PH Levels")
     
   return mesg
 

@@ -1,11 +1,11 @@
 def monitor():
 
-  ph_level = .3
+  phosphateLevel = .3
 
   current = get_posphate()
   mesg = "Posphates OK"
   
-  if (current > ph_level):
+  if (current > phosphateLevel):
       mesg = "Posphates too high!"
 
   return mesg

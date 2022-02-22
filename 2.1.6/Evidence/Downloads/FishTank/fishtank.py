@@ -31,6 +31,7 @@ class FishTank(tk.Tk):
   #  - magnesium should be between 1250 and 1350
   #  - phosphate should be less than .3
   #
+
   def monitor(self):
 
     msg = "ENVIRONMENTAL FACTORS:\n"
@@ -45,10 +46,12 @@ class FishTank(tk.Tk):
 
     mb.showinfo("Status Check", msg)
 
+    return msg
+
   # the GUI for the monitoring software
   def __init__(self):
     tk.Tk.__init__(self)
-    
+
     # reference a png to use as teh backround image
     dirname = os.path.dirname(__file__)
     print(dirname)
@@ -71,7 +74,28 @@ class FishTank(tk.Tk):
     self.lbl_username.pack(pady=5)
 
     font_setup = ("Arial", 16, "normal")
-    self.lbl_username = tk.Label(self.frame_info, background="white", text="Current Status:\n All factors OK")
+
+
+    currentStatus = "Current Status: "
+
+    msg = "ENVIRONMENTAL FACTORS:\n"
+    msg = msg + ph.monitor() + "\n"
+    msg = msg + alkalinity.monitor() + "\n"
+    msg = msg + salinity.monitor() + "\n"
+    msg = msg + temperature.monitor() + "\n"
+    msg = msg + "\nTRACE CHEMICALS:\n"
+    msg = msg +  calcium.monitor() + "\n"
+    msg = msg + magnesium.monitor() + "\n"
+    msg = msg + phosphate.monitor()
+
+    if "too" in msg:
+      currentStatus += "Levels are Unbalanced"
+    else:
+      currentStatus += "OK"
+
+
+
+    self.lbl_username = tk.Label(self.frame_info, background="white", text=currentStatus)
     self.lbl_username.pack(pady=5)
 
     self.btn_login = tk.Button(self.frame_info, text="Perform Manual Check", command=self.monitor)
