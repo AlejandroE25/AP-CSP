@@ -22,4 +22,4 @@ def monitor():
 
 # Function to simulate actual fish tank monitoring
 def get_magnesium_level():
-  return 1300
+  return 130
