@@ -8,7 +8,6 @@ enteredPass = None
 
 
 def buttonTest():
-
     global enteredPass
     enteredPass = passVar.get()
 
@@ -37,21 +36,17 @@ passEnt = tk.Entry(frameLogin, bd=3, textvariable=passVar, show="·").pack(pady=
 
 # Add this code before the code that creates your "Login" button
 bt_image = tk.PhotoImage(file="button.gif")
-bt_image = bt_image.subsample(10,10)
+bt_image = bt_image.subsample(10, 10)
 
 loginButton = tk.Button(frameLogin, text="Log in", command=buttonTest, image=bt_image).pack()
 
 frameAuth = tk.Frame(root)
 frameAuth.grid(row=0, column=0, sticky="news")
 
-
 frameLogin.tkraise()
-
-
 
 testTextbox = ScrolledText(frameAuth)
 testTextbox.configure(height=10, width=50)
 testTextbox.pack()
-
 
 root.mainloop()
