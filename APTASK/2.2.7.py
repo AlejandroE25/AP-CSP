@@ -5,6 +5,19 @@ from tkinter import messagebox
 import math
 import time
 
+pref = "\033["
+reset = f"{pref}0m"
+
+
+class colors:
+    black = pref + "30m"
+    red = pref + "31m"
+    green = pref + "32m"
+    yellow = pref + "33m"
+    blue = pref + "34m"
+    magenta = pref + "35m"
+    cyan = pref + "36m"
+    white = pref + "37m"
 
 
 def findNumTrial1(timeIn=0.0, s_In=0.0):
@@ -14,7 +27,8 @@ def findNumTrial1(timeIn=0.0, s_In=0.0):
         t = timeIn
 
     if s_In == 0:
-        S = (float(input("How stable would you say your memory is (From 0% to 100%, don't use the % symbol)\n")))
+        S = (float(input(
+            f"How stable would you say your memory is? {colors.blue}(From 0% to 100%, don't use the % symbol){reset}\n")))
     else:
         S = s_In
     exponentNumber = -t / S
@@ -23,22 +37,29 @@ def findNumTrial1(timeIn=0.0, s_In=0.0):
     return R, t, S
 
 
-retrievability, ogTime, stability = findNumTrial1()
-print(f"Retrievability = {round(retrievability * 100, 2)}%, Time = {ogTime} days")
+varDict = {
+    # Creates a dictionary.  It's like a list, but instead of using a number as an index, you can use a name.
+    "Retrieveability": 0,
+    "Original Time": 0,
+    "Memory Stability": 0,
+    "User Requirement": 0
+}
 
-userReq = float(input("\nHow retrievable must this knowledge be by the time you need it? (Enter as percent, don't use the % symbol)\n"))/100  #Just to make more user friendly
+varDict["Retrieveability"], varDict["Original Time"], varDict["Memory Stability"] = findNumTrial1()
+print(f"\nRetrievability = {colors.green}" + str(round(varDict["Retrieveability"] * 100, 2)) + f"{reset}%, Time = {colors.green}" + str(varDict["Original Time"]) + f"{reset} days")
 
-if retrievability < userReq:
-    timeOut = ogTime
-    while not retrievability >= userReq:
-        retrievability, timeOut, uselessVariable = findNumTrial1(timeIn=timeOut - (1/24), s_In=stability) #Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
+varDict["User Requirement"] = float(input(f"\nHow retrievable must this knowledge be by the time you need it? {colors.blue}(Enter as percent, don't use the % symbol){reset}\n")) / 100  # Just to make more user friendly
+
+if varDict["Retrieveability"] < varDict["User Requirement"]:
+    timeOut = varDict["Original Time"]
+    while not varDict["Retrieveability"] >= varDict["User Requirement"]:
+        varDict["Retrieveability"], timeOut, varDict["Memory Stability"] = findNumTrial1(
+            timeIn=timeOut - (1 / 24), s_In=varDict["Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
 else:
     print("You're all good! \n Good luck!")
     exit()
 
-
-print(f"To reach a retrievability of {userReq * 100}%, you must study no longer than {round(timeOut * 24)} hours, or {round(timeOut)} days before your test")
-
+print(f"To reach a retrievability of {colors.yellow}" + str(varDict["User Requirement"] * 100) + f"{reset}%, you must study no longer than {colors.green}{round(timeOut * 24, 2)}{reset} hours, or {colors.green}{round(timeOut, 1)}{reset} days before your test")
 
 '''
 fig = plt.figure()
