@@ -9,6 +9,11 @@ pref = "\033["
 reset = f"{pref}0m"
 
 
+def colouredText(text, colour):
+    global reset
+    return f"{colour}{text}{reset}"
+
+
 class colors:
     black = pref + "30m"
     red = pref + "31m"
@@ -27,14 +32,14 @@ def findNumTrial1(timeIn=0.0, s_In=0.0):
         t = timeIn
 
     if s_In == 0:
-        S = (float(input(
-            f"How stable would you say your memory is? {colors.blue}(From 0% to 100%, don't use the % symbol){reset}\n")))
+        stability = (float(input(
+            f"How stable would you say your memory is? {colouredText('(From 0% to 100%, do not use the % symbol)', colors.blue)}\n")))
     else:
-        S = s_In
-    exponentNumber = -t / S
+        stability = s_In
+    exponentNumber = -t / stability
 
     R = math.e ** exponentNumber
-    return R, t, S
+    return R, t, stability
 
 
 varDict = {
@@ -46,12 +51,9 @@ varDict = {
 }
 
 varDict["Retrieveability"], varDict["Original Time"], varDict["Memory Stability"] = findNumTrial1()
-print(f"\nRetrievability = {colors.green}" + str(
-    round(varDict["Retrieveability"] * 100, 2)) + f"{reset}%, Time = {colors.green}" + str(
-    varDict["Original Time"]) + f"{reset} days")
+print(f"\nRetrievability = {colouredText(str(round(varDict['Retrieveability'] * 100, 2)), colors.green)}%, Time = {colouredText(str(varDict['Original Time']), colors.green)} days")
 
-varDict["User Requirement"] = float(input(
-    f"\nHow retrievable must this knowledge be by the time you need it? {colors.blue}(Enter as percent, don't use the % symbol){reset}\n")) / 100  # Just to make more user friendly
+varDict["User Requirement"] = float(input(f"\nHow retrievable must this knowledge be by the time you need it? {colouredText('(Enter as percent, do not use the % symbol)', colors.blue)}\n")) / 100  # Just to make more user friendly
 
 timeOut = varDict["Original Time"]
 
@@ -61,8 +63,7 @@ if varDict["Retrieveability"] < varDict["User Requirement"]:
             timeIn=timeOut - (1 / 24), s_In=varDict[
                 "Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
     # End of while loop
-    print(f"To reach a retrievability of {colors.yellow}" + str(varDict[
-                                                                    "User Requirement"] * 100) + f"{reset}%, you must study no longer than {colors.green}{round(timeOut * 24, 2)}{reset} hours, or {colors.green}{round(timeOut, 1)}{reset} days before your test")
+    print(f"To reach a retrievability of {colouredText(str(varDict['User Requirement'] * 100), colors.yellow)}%, you must study no longer than {colouredText(round(timeOut * 24, 2), colors.green)} hours, or {colouredText(round(timeOut, 1), colors.green)} days before your test")
 else:
     print("You're all good! \nGood luck!")
 
