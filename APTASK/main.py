@@ -1,7 +1,3 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from tkinter import *
-from tkinter import messagebox
 import math
 import time
 
@@ -59,10 +55,8 @@ timeOut = varDict["Original Time"]
 
 if varDict["Retrieveability"] < varDict["User Requirement"]:
     while not varDict["Retrieveability"] >= varDict["User Requirement"]:
-        varDict["Retrieveability"], timeOut, varDict["Memory Stability"] = findNumTrial1(
-            timeIn=timeOut - (1 / 24), s_In=varDict[
-                "Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
+        varDict["Retrieveability"], timeOut, varDict["Memory Stability"] = findNumTrial1(timeIn=timeOut - (1 / 24), s_In=varDict["Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
     # End of while loop
-    print(f"To reach a retrievability of {colouredText(str(varDict['User Requirement'] * 100), colors.yellow)}%, you must study no longer than {colouredText(round(timeOut * 24, 2), colors.green)} hours, or {colouredText(round(timeOut, 1), colors.green)} days before your test")
+    print(f"To reach a retrievability of {colouredText(str(varDict['User Requirement'] * 100), colors.yellow)}%, you must study no longer than {colouredText(round(timeOut * 24, 2), colors.green)} hours ({colouredText(round(timeOut, 1), colors.green)} days) before your test")
 else:
     print("You're all good! \nGood luck!")
