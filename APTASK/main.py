@@ -1,5 +1,70 @@
 import math
 import time
+import random
+import os
+
+#The different tests & test list
+Animal = ["Cat","Dog","Bird","Mouse","Bunny","Cow","Horse","Giraffe","Elephant","Sheep"]
+Number = ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"]
+Vehicle = ["Car","Truck","Train","Van","Boat","Plane","Submarine","Bike","Motorcycle","Rocket"]
+Object = ["Fork","House","Balloon","Shovel","Camera","Table","Mirror","Shoe","Paper",""]
+Color = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Indigo", "Gray", "Brown", "Pink"]
+
+testList = {
+    "Animal": Animal,
+    "Number": Number,
+    "Vehicle": Vehicle,
+    "Object": Object,
+    "Color": Color
+}
+
+testSample = []
+
+#Asks if user has taken test and then initiates the test
+while True:
+    userInput = input("Have you taken the memory test? (Y/N) ")
+    if userInput.upper() == "Y":
+        break
+    elif userInput.upper() == "N":
+        testToTake = testList[input("What test do you want to take?(Animal, Number, Vehicle, Object, or Color) ")]
+        for indxs in testToTake:
+            testSample.append(indxs)
+        random.shuffle(testToTake)
+        testAnswer = testToTake
+        print(testToTake)
+        time.sleep(5)
+        os.system('cls || clear')
+
+        listInput = 0
+        testInput = []
+        #Asks the user for answers for the test
+        while listInput != 10:
+            print("Sample:", testSample)
+            testInputIndex = input("Write the words in order as you saw them one at a time." )
+            testInput.append(testInputIndex)
+            print("\n", "Answer:", testInput, "\n")
+            listInput += 1
+        #Checks for correct answers
+        print(testAnswer)
+        correct = 0
+        wrong = 0
+        for item in testInput:
+            if testAnswer.index(item) == testInput.index(item):
+                correct += 1
+            else:
+                wrong += 1
+        #Calculates and displays test answer
+        testScore = correct * 10
+        print("\n", "Here is your test score & memory strength:", testScore )
+
+        break
+
+
+    else:
+        print("Please give a valid response")
+
+
+# Where the working code starts
 
 pref = "\033["
 reset = f"{pref}0m"
@@ -30,6 +95,7 @@ def findNumTrial1(timeIn=0.0, s_In=0.0):
     if s_In == 0:
         stability = (float(input(
             f"How stable would you say your memory is? {colouredText('(From 0% to 100%, do not use the % symbol)', colors.blue)}\n")))
+
     else:
         stability = s_In
     exponentNumber = -t / stability
@@ -55,8 +121,10 @@ timeOut = varDict["Original Time"]
 
 if varDict["Retrieveability"] < varDict["User Requirement"]:
     while not varDict["Retrieveability"] >= varDict["User Requirement"]:
-        varDict["Retrieveability"], timeOut, varDict["Memory Stability"] = findNumTrial1(timeIn=timeOut - (1 / 24), s_In=varDict["Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
+        varDict["Retrieveability"], timeOut, varDict["Memory Stability"] = findNumTrial1(
+            timeIn=timeOut - (1 / 24), s_In=varDict[
+                "Memory Stability"])  # Reduce the count by an hour each time.  I think it works.  It seems to work just fine after all.
     # End of while loop
-    print(f"To reach a retrievability of {colouredText(str(varDict['User Requirement'] * 100), colors.yellow)}%, you must study no longer than {colouredText(round(timeOut * 24, 2), colors.green)} hours ({colouredText(round(timeOut, 1), colors.green)} days) before your test")
+    print(f"To reach a retrievability of {colouredText(str(varDict['User Requirement'] * 100), colors.yellow)}%, you must study no longer than {colouredText(round(timeOut * 24, 2), colors.green)} hours, or {colouredText(round(timeOut, 1), colors.green)} days before your test")
 else:
     print("You're all good! \nGood luck!")
