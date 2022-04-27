@@ -40,18 +40,19 @@ while True:
        testInput = []
        # Asks the user for answers for the test
        while listInput != 10:
-           print("Word Bank:", testSample)
-           testInputIndex = string.capwords(input("Write the words in order as you saw them one at a time. "))
-           if testInputIndex in testAnswer:
-               testInput.append(testInputIndex)
-               print("\n", "Answer:", testInput, "\n")
-               listInput += 1
-           elif testInputIndex in testInput:
-               print(f"'{testInputIndex}' is already in the list")
-           else:
-               print(f"'{testInputIndex}' is not a valid answer")
-           time.sleep(3)
-           os.system('cls || clear')
+            print("Word Bank:", testSample)
+            testInputIndex = string.capwords(input("Write the words in order as you saw them one at a time. "))
+            if testInputIndex in testInput:
+                print(f"'{testInputIndex}' is already in the list")
+            elif testInputIndex in testAnswer:
+                testInput.append(testInputIndex)
+                print("\n", "Answer:", testInput, "\n")
+                listInput += 1
+            
+            else:
+                print(f"'{testInputIndex}' is not a valid answer")
+            time.sleep(1)
+            os.system('cls || clear')
        # Checks for correct answers
        print(f"The correct answers are {testAnswer}")
        correct = 0
