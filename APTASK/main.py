@@ -48,7 +48,7 @@ while True:
                 testInput.append(testInputIndex)
                 print("\n", "Answer:", testInput, "\n")
                 listInput += 1
-            
+
             else:
                 print(f"'{testInputIndex}' is not a valid answer")
             time.sleep(1)
